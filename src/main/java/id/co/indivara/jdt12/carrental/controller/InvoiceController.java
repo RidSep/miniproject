@@ -16,7 +16,7 @@ public class InvoiceController {
     public Invoice returnVehicle(@RequestBody Invoice invoice) throws Exception{
         return invoiceService.returnCar(invoice);
     }
-    @GetMapping("/viewtrans")
+    @GetMapping("/viewtransfinish")
     public List<Invoice> getAllTransFinish(){
         return invoiceService.getlAllTransFinish();
     }

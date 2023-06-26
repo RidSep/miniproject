@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CreateTransaksiRepository extends JpaRepository<Rental,String> {
+public interface RentalRepository extends JpaRepository<Rental,String> {
     @Query(value = "SELECT \n" +
             "(CASE WHEN r.rent_status <> 2 THEN 'no' ELSE 'yes' END) AS result\n" +
             "FROM trx_cust_rent r\n" +

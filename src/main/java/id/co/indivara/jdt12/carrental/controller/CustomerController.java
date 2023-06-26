@@ -25,7 +25,7 @@ public class CustomerController {
         return customerService.findByIdCustomer(customerId);
     }
     @PutMapping("/customer/{customerId}")
-    public Customer updateCustomer(@RequestBody Customer customer, @PathVariable("customerId") String customerId){
+    public Customer updateCustomer(@RequestBody Customer customer, @PathVariable("customerId") String customerId)throws Exception{
         return customerService.updateCustomer(customer,customerId);
     }
 

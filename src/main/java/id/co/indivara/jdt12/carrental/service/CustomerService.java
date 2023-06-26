@@ -26,8 +26,8 @@ public class CustomerService {
         customerRepository.deleteById(customerId);
         return new ResponseMessage(200,"Berhasil Hapus");
     }
-    public Customer updateCustomer(Customer customer, String customerId){
-        Customer cus = customerRepository.findById(customerId).get();
+    public Customer updateCustomer(Customer customer, String customerId) throws Exception{
+        Customer cus = customerRepository.findById(customerId).orElseThrow(()->new Exception("Customer Not Found"));
         if (Objects.nonNull(customer.getUserName()) && !"".equalsIgnoreCase(customer.getUserName())){
             cus.setUserName(customer.getUserName());
         }
@@ -43,7 +43,6 @@ public class CustomerService {
         if (Objects.nonNull(customer.getAddress()) && !"".equalsIgnoreCase(customer.getAddress())){
             cus.setAddress(customer.getAddress());
         }
-
         return customerRepository.save(cus);
     }
 }

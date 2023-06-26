@@ -24,17 +24,17 @@ public class VehicleService {
     public Vehicle createVehicle(Vehicle vehicle){
         return vehicleRepository.save(vehicle);
     }
-    public Vehicle updateVehicle(Vehicle vehicle, String vehicleId){
-        Vehicle vec = vehicleRepository.findById(vehicleId).get();
+    public Vehicle updateVehicle(Vehicle vehicle, String vehicleId) throws Exception{
+        Vehicle vec = vehicleRepository.findById(vehicleId).orElseThrow(()->new Exception("Vehicle Not Found"));
         if (Objects.nonNull(vehicle.getVehicleBrand()) && !"".equalsIgnoreCase(vehicle.getVehicleBrand())){
             vec.setVehicleBrand(vehicle.getVehicleBrand());
-        } else if (Objects.nonNull(vehicle.getVehicleSeries()) && !"".equalsIgnoreCase(vehicle.getVehicleSeries())) {
+        } if (Objects.nonNull(vehicle.getVehicleSeries()) && !"".equalsIgnoreCase(vehicle.getVehicleSeries())) {
             vec.setVehicleSeries(vehicle.getVehicleSeries());
-        } else if (Objects.nonNull(vehicle.getVehicleType()) && !"".equalsIgnoreCase(vehicle.getVehicleType())) {
+        } if (Objects.nonNull(vehicle.getVehicleType()) && !"".equalsIgnoreCase(vehicle.getVehicleType())) {
             vec.setVehicleType(vehicle.getVehicleType());
-        } else if (Objects.nonNull(vehicle.getVehicleNo()) && !"".equalsIgnoreCase(vehicle.getVehicleNo())) {
+        } if (Objects.nonNull(vehicle.getVehicleNo()) && !"".equalsIgnoreCase(vehicle.getVehicleNo())) {
             vec.setVehicleNo(vehicle.getVehicleNo());
-        } else if (Objects.nonNull(vehicle.getCostPerhour())) {
+        } if (Objects.nonNull(vehicle.getCostPerhour())) {
             vec.setCostPerhour(vehicle.getCostPerhour());
         }
         return vehicleRepository.save(vec);

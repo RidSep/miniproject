@@ -33,13 +33,6 @@ public class TestCaseVehicleController {
     private MockMvc mockMvc;
     @Autowired
     private VehicleService vehicleService;
-    @Autowired
-    private VehicleController vehicleController;
-    @Before
-    public void setUp(){
-        MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(vehicleController).build();
-    }
 
     @Test
     public void getAllVehicleTest() throws Exception {

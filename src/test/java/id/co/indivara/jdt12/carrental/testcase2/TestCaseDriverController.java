@@ -34,13 +34,6 @@ public class TestCaseDriverController {
     private MockMvc mockMvc;
     @Autowired
     private DriverService driverService;
-    @Autowired
-    private DriverController driverController;
-    @Before
-    public void setUp(){
-        MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(driverController).build();
-    }
 
     @Test
     public void getAllDriverTest() throws Exception {

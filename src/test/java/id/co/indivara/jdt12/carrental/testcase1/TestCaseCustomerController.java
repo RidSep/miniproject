@@ -31,14 +31,7 @@ public class TestCaseCustomerController {
     private MockMvc mockMvc;
     @Autowired
     private CustomerService customerService;
-    @Autowired
-    private CustomerController customerController;
 
-    @Before
-    public void setUp(){
-        MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
-    }
 
     @Test
     public void getAllVehicleTest() throws Exception {

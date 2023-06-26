@@ -66,7 +66,7 @@ public class Rental extends BaseEntity{
     private Vehicle vehicle;
 
     public enum TranscationStatus{
-        RENT,
+        BOOKED,
         ON_GOING,
         FINISH
     }

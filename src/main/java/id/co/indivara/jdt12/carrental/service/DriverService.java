@@ -25,10 +25,15 @@ public class DriverService {
     }
     public Driver updateDriver(Driver driver, String driverId)throws Exception{
         Driver driv = driverRepository.findById(driverId).orElseThrow(()->new Exception("Driver Not Found"));
-        driv.setDriverName(driver.getDriverName());
-        driv.setContact(driver.getContact());
-        driv.setAddress(driver.getContact());
-        driv.setCostPerhour(driver.getCostPerhour());
+        if (Objects.nonNull(driver.getDriverName()) && !"".equalsIgnoreCase(driver.getDriverName())){
+            driv.setDriverName(driver.getDriverName());
+        }if (Objects.nonNull(driver.getContact()) && !"".equalsIgnoreCase(driver.getContact())) {
+            driv.setContact(driver.getContact());
+        }if (Objects.nonNull(driver.getAddress()) && !"".equalsIgnoreCase(driver.getAddress())) {
+            driv.setAddress(driver.getAddress());
+        }if (Objects.nonNull(driver.getCostPerhour())) {
+            driv.setCostPerhour(driver.getCostPerhour());
+        }
         return driverRepository.save(driv);
     }
     public ResponseMessage deleteDriver(String driverId){

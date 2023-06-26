@@ -29,7 +29,7 @@ public class VehicleController {
         return vehicleService.createVehicle(vehicle);
     }
     @PutMapping("/vehicle/{vehicleId}")
-    public Vehicle updateVehicle(@RequestBody Vehicle vehicle, @PathVariable("vehicleId") String vehicleId){
+    public Vehicle updateVehicle(@PathVariable("vehicleId") String vehicleId, @RequestBody Vehicle vehicle)throws Exception{
         return vehicleService.updateVehicle(vehicle,vehicleId);
     }
     @DeleteMapping("/vehicle/{vehicleId}")
