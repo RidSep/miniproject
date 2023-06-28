@@ -2,6 +2,7 @@ package id.co.indivara.jdt12.carrental.service;
 
 import id.co.indivara.jdt12.carrental.entity.*;
 import id.co.indivara.jdt12.carrental.repo.*;
+import id.co.indivara.jdt12.carrental.response.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,13 +54,10 @@ public class RentalService {
         rental.setDriver(driver);
     }
     public Rental viewSchedule(String rentId, Driver driver) throws Exception{
-        Rental rental = rentalRepository.findById(rentId).orElseThrow(()->new Exception("Transaction Not Found"));
-        Driver dri = driverRepository.findById(driver.getDriverId()).orElseThrow(()->new Exception("Driver Not Found"));
-        String driverShceduleAvail = rentalRepository.findDriverAvailbility(dri.getDriverId());
-        if (driverShceduleAvail != null && driverShceduleAvail.equalsIgnoreCase("yes")){
-            throw new Exception("Shcedule Has Been End");
-        } else if (driverShceduleAvail == null) {
-            throw new Exception("Shcedule Not Found");
+            Rental renChecker = rentalRepository.findById(rentId).orElseThrow(()->new Exception("Transaction Not Found"));
+            Rental rental = rentalRepository.findAllTransactionByDriverId(driver.getDriverId(),renChecker.getRentStatus().ordinal()).orElseThrow(()->new Exception("Schedule Not Found"));
+        if(renChecker.getRentStatus().ordinal() == 2 ){
+            throw new Exception("The schedule has ended");
         }
         return rental;
     }

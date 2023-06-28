@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RentalRepository extends JpaRepository<Rental,String> {
@@ -30,4 +31,6 @@ public interface RentalRepository extends JpaRepository<Rental,String> {
     String findDriverAvailbility(@Param("driverId") String driverId);
     @Query(value = "SELECT * FROM trx_cust_rent t WHERE t.rent_status = :rentStatus",nativeQuery = true)
     List<Rental> findByRentStatus(@Param("rentStatus") String rentStatus);
+    @Query(value = "SELECT t.rent_id, t.check_in, t.check_out, t.rent_status FROM trx_cust_rent t WHERE t.driver_id =?1 AND t.rent_status=?2",nativeQuery = true)
+    Optional <Rental> findAllTransactionByDriverId(String driverId, Integer status);
 }

@@ -23,6 +23,10 @@ public class InvoiceService {
     @Transactional
     public Invoice returnCar(Invoice invoice) throws Exception{
         Rental ren = rentalRepository.findById(invoice.getRentId()).orElseThrow(()-> new Exception("Not Found Rental Transaction"));
+        String checkerStatus = rentalRepository.findVehicleAvailbility(ren.getVehicleId());
+        if (checkerStatus !=null && checkerStatus.equalsIgnoreCase("yes")) {
+            throw new Exception("Status Sudah Finish");
+        }
         ren.setRentStatus(Rental.TranscationStatus.FINISH);
         rentalRepository.save(ren);
 

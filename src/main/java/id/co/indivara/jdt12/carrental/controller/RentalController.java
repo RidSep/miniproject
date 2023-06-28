@@ -2,6 +2,7 @@ package id.co.indivara.jdt12.carrental.controller;
 
 import id.co.indivara.jdt12.carrental.entity.Driver;
 import id.co.indivara.jdt12.carrental.entity.Rental;
+import id.co.indivara.jdt12.carrental.response.ResponseMessage;
 import id.co.indivara.jdt12.carrental.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,14 @@ public class RentalController {
         return rental;
     }
     @GetMapping("/driver/schedule/{rentId}")
-    public Rental viewSchedule(@PathVariable String rentId, @RequestBody Driver driver) throws Exception{
-        return rentalService.viewSchedule(rentId,driver);
+    public Object viewSchedule(@PathVariable String rentId, @RequestBody Driver driver) throws Exception{
+        Object rental = null;
+        try {
+            rental = rentalService.viewSchedule(rentId,driver);
+        }catch (Exception ex){
+            rental = new ResponseMessage(404, ex.getMessage());
+        }
+        return rental;
     }
     @GetMapping("/viewtranstatus")
     public List<Rental> getAllTranStatus(@RequestParam String rentStatus){
